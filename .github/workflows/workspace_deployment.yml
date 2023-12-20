@@ -1,1 +1,29 @@
 
+name: workspace_CI
+
+on:
+    push:
+        branches: [workspace_publish]
+    workflow_dispatch:
+jobs:
+  release:
+        # You also can use the self-hosted runners.
+    runs-on: windows-latest
+    steps:
+        # Checks out your repository under $GITHUB_WORKSPACE, so your job can access it.
+        - uses: actions/checkout@v2
+        - name: synapse workspace deployment
+          uses: azure/synapse-workspace-deployment@release-1.0
+          with:
+            TargetWorkspaceName: 'helixuat'
+            TemplateFile: './Synapsedev/TemplateForWorkspace.json'
+            ParametersFile: './Synapsedev/TemplateParametersForWorkspace.json'
+           # OverrideArmParameters: './path of the parameters.yaml'
+            environment: 'Azure Public'
+            resourceGroup: 'vasgroup'
+            clientId: ${{secrets.CLIENTID}}
+            clientSecret: ${{secrets.CLIENTSECRET}}
+            subscriptionId: '5d65eaa1-4ee9-4517-b1b4-60c103498c3a'
+            tenantId: '901a5115-7686-4535-8f74-b18c3535b1ee'
+            DeleteArtifactsNotInTemplate: 'false'
+            managedIdentity: 'False'

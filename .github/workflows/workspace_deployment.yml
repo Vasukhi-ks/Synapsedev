@@ -16,8 +16,8 @@ jobs:
           uses: azure/synapse-workspace-deployment@release-1.0
           with:
             TargetWorkspaceName: 'helixuat'
-            TemplateFile: './Synapsedev/TemplateForWorkspace.json'
-            ParametersFile: './Synapsedev/TemplateParametersForWorkspace.json'
+            TemplateFile: './helixdev/TemplateForWorkspace.json'
+            ParametersFile: './helixdev/TemplateParametersForWorkspace.json'
            # OverrideArmParameters: './path of the parameters.yaml'
             environment: 'Azure Public'
             resourceGroup: 'vasgroup'
